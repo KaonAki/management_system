@@ -48,6 +48,7 @@
 }
 
 .product-group img{
+    margin-right: 15px;
     width: 5%;
     max-height: 50px;
     object-fit: contain;

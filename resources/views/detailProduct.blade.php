@@ -22,7 +22,7 @@
                     <td>{{ $productModel->id }}</td>
                     <td><img class="detailImage" src="{{ asset('/storage/images/' . $productModel->img_path) }}"></td>
                     <td>{{ $productModel->product_name }}</td>
-                    <td>{{ $model->company_name }}</td>
+                    <td>{{ $productModel->company->company_name }}</td>
                     <td>{{ $productModel->price }}</td>
                     <td>{{ $productModel->stock }}</td>
                     <td>{{ $productModel->comment }}</td>
