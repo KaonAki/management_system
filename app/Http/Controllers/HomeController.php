@@ -36,7 +36,7 @@ class HomeController extends Controller
         $productModel = new Product();
         // 全部の値取得
         $products = $productModel->all();
-        // dd($products);
+        dd($products);
 
         return view('home', compact('companies', 'products'));
     }
@@ -173,8 +173,21 @@ class HomeController extends Controller
     // 編集完了
     public function editCompleteProduct(Request $request ,$id)
     {
-        // $model =Company::find($id);
+        $model =Company::find($id);
         $productModel = Product::find($id);
+        $editProduct = new Product();
+        // 全部の値取得
+        $products = $editProduct->all();
+
+        // アップロードされたファイル名を取得
+        $editImage = $request->file('editImage');
+
+        
+        $file_name = $editImage->getClientOriginalName();
+
+        // 保存
+        $editImage->storeAs('public/images', $file_name);
+            dd($editImage);
 
         // dd($request);
 
@@ -187,7 +200,7 @@ class HomeController extends Controller
             'company_id' => $request->editCompanyId
         ]);  
 
-        return redirect()->route('home', compact( 'productModel'));
+        return redirect()->route('home', compact( 'productModel','model'));
     }
 
     // 削除完了

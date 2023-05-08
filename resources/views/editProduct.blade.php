@@ -40,10 +40,10 @@
                     placeholder="{{ $productModel->comment }}">
 
 
-                <label for="newImg">画像</label>
-                <input type="image" src="{{ asset('/storage/images/' . $productModel->img_path) }}" class="form-control"
-                    name="">
+                <label for="editImg">画像</label>
+                <img src="{{ asset('/storage/images/' . $productModel->img_path) }}" class="form-control">
                 {{-- inputのfileで入れちゃう editImage --}}
+                    <input type="file" class="form-control" name="editImage" >
 
 
                 <button type="submit" class="btn btn-success">{{ __('登録') }}</button>
