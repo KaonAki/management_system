@@ -26,13 +26,10 @@ class Company extends Model
         return $this->hasMany('App\Models\Product');
     }
 
-    // // 更新処理
-    // public function updateCompany($request, $model)
-    // {
-    //     $result = $model->fill([
-    //         'company_name' => $request->company_name,
-    //     ])->save();
-
-    //     return $result;
-    // }
+    public function  getCompanyId($id)
+    {
+        $this->id = $id;
+        $companies = Company::find($id);
+        return $companies;
+    }
 }

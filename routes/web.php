@@ -46,4 +46,8 @@ Route::put('/editComplate/{id}', [App\Http\Controllers\HomeController::class, "e
 // 削除完了
 Route::post('/delete/{id}', [App\Http\Controllers\HomeController::class, "deleteProduct"])->name('deleteProduct');
 
+// 
+// Route::post('/validate', [App\Http\Controllers\HomeController::class, "validateProduct"])->name('validateProduct');
 
+// ajaxを繋げる
+Route::get('/product/index/{name}', [App\Http\Controllers\HomeController::class, "productSearchName"])->name('productSearchName');

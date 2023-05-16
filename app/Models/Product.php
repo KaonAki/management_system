@@ -15,6 +15,13 @@ class Product extends Model
         'updated_at'
     ];
 
+public function __construct()
+{
+
+    
+}
+
+
     public function getList()
     {
         // テーブルからデータを取得
@@ -27,17 +34,33 @@ class Product extends Model
         return $this->belongsTo('App\Models\Company');
     }
 
-    // // 更新処理
-    // public function updateProduct($request, $productModel)
-    // {
-    //     $result = $productModel->fill([
-    //         'product_name' => $request->product_name,
-    //         'price'=>$request->price,
-    //         'stock'=>$request->stock,
-    //         'comment'=>$request->comment,
-    //         'img_path'=>$request->img_path,
-    //     ])->save();
+    public function  getProductId($id)
+    {
+        $this->id = $id;
+        $products = Product::find($id);
+        return $products;
+    }
 
-    //     return $result;
-    // }
+    // queryのやつ
+    public function getSearch($search)
+    {
+        $query = Product::query();
+        $products = $query->where('product_name', 'like', '%' . $search . '%')->get();
+        return $products;
+    }
+
+    // createのやつ
+    public function storeCreate($newProductName,$newPrice,$newStock,$newCompanyId,$newComment,$file_name)
+    {
+        Product::create([
+            'img_path' => $file_name,
+            'product_name' => $newProductName,
+            'price' => $newPrice,
+            'stock' => $newStock,
+            'company_id' => $newCompanyId,
+            'comment' => $newComment,
+        ]);
+    }
+
+    
 }

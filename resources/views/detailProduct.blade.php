@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="detail-container w-75 m-auto">
         <h1>詳細確認</h1>
         <table class="table table-striped">
@@ -19,13 +18,13 @@
             <tbody>
                 <tr>
                 <tr>
-                    <td>{{ $productModel->id }}</td>
-                    <td><img class="detailImage" src="{{ asset('/storage/images/' . $productModel->img_path) }}"></td>
-                    <td>{{ $productModel->product_name }}</td>
-                    <td>{{ $productModel->company->company_name }}</td>
-                    <td>{{ $productModel->price }}</td>
-                    <td>{{ $productModel->stock }}</td>
-                    <td>{{ $productModel->comment }}</td>
+                    <td>{{ $productId->id }}</td>
+                    <td><img class="detailImage" src="{{ asset('/storage/images/' . $productId->img_path) }}"></td>
+                    <td>{{ $productId->product_name }}</td>
+                    <td>{{ $productId->company->company_name }}</td>
+                    <td>{{ $productId->price }}</td>
+                    <td>{{ $productId->stock }}</td>
+                    <td>{{ $productId->comment }}</td>
                 </tr>
             </tbody>
         </table>
@@ -33,7 +32,7 @@
             <input type="submit" class="btn btn-info" name="submit" value="戻る">
         </form>
 
-        <a  href="{{route('editProduct', $productModel->id)  }}">
+        <a href="{{ route('editProduct', $productId->id) }}">
             <input type="submit" class="btn btn-info" name="submit" value="編集">
         </a>
     </div>
