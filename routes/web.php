@@ -50,4 +50,4 @@ Route::post('/delete/{id}', [App\Http\Controllers\HomeController::class, "delete
 // Route::post('/validate', [App\Http\Controllers\HomeController::class, "validateProduct"])->name('validateProduct');
 
 // ajaxを繋げる
-Route::get('/products', [App\Http\Controllers\HomeController::class, "productSearchName"])->name('productSearchName');
+Route::get('/products/{product_name}', [App\Http\Controllers\HomeController::class, "productSearchName"])->name('productSearchName');

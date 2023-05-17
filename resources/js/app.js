@@ -13,25 +13,22 @@ $('.search-form .search-icon').on('click', function () {
 
   $.ajax({
     type: 'get',
-    url: '/products', // web.phpのURLと同じ形にする
+    url: '/products/' + productName, // web.phpのURLと同じ形にする
     dataType: 'json', // json形式で受け取る
     data: {
       'product_name': productName // ここはサーバーに贈りたい情報。今回は検索フォームのバリューを送りたい。
     }
 
   }).done(function (data) { // ajaxが成功したときの処理
-    console(data)
     let html = ''
     $.each(data, function (index, value) { // dataの中身からvalueを取り出す
       // ここの記述はリファクタ可能
-      let id = value.id
-      let name = value.name
-      let avatar = value.avatar
-      let itemsCount = value.items_count
+      let product_name = value.product_name
+      console.log(product_name)
       // １ユーザー情報のビューテンプレートを作成
       html = `
                      <p>できました。</p>
-                              `
+            `
     })
     $('.user-table tbody').append(html); // できあがったテンプレートをビューに追加
     // 検索結果がなかったときの処理

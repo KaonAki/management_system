@@ -276,13 +276,14 @@ class HomeController extends Controller
     }
 
     // ajaxの検索フォーム
-    public function productSearchName()
+    public function productSearchName($product_name)
     {
-        dd('ほーむ');
-        $products = $this->product
-            ->where('product_name', 'like', '%' . $productName . '%')
-            ->orderBy('id', 'desc')
-            ->get();
+        // 検索フォームで入力された値を取得する
+        // $search = $request->input('search_name');
+
+        $productModel = new Product();
+        $products = $productModel->getSearch($product_name);
+        // dd('ほーむ');
         return response()->json($products);
     }
 }
