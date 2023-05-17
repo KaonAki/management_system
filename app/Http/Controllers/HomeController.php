@@ -53,7 +53,7 @@ class HomeController extends Controller
         $search = $request->input('search_name');
 
         $productModel = new Product();
-        $productCompanyId = $productModel->getSearch($search);
+        $products = $productModel->getSearch($search);
         // dd($search);
 
         // $query = Product::query();
@@ -62,7 +62,7 @@ class HomeController extends Controller
         // dd($products);
         // }
 
-        return view('home', compact('companies', 'productCompanyId'));
+        return view('home', compact('companies', 'products'));
         // return redirect('/')->with(compact('products'));
     }
 

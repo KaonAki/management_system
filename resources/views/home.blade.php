@@ -3,11 +3,12 @@
 @section('content')
     <div class="search">
         <p class="serch_name">検索条件</p>
-        <div class="serch_name search-form">
+        <form method="GET" action="{{ route('searchProduct') }}">
             <p class="product_name">商品名</p>
-            <input id="search_name" class="search_box" type="text" name="search_name" placeholder="キーワードを入力">
-            <input type="button" class="btn btn-info search-icon" name="button" value="検索">
-        </div>
+            <input class="search_box" type="search" name="search" placeholder="キーワードを入力"
+                value="@if (isset($search)) {{ $search }} @endif">
+            <input type="submit" class="btn btn-info" name="submit" value="検索">
+        </form>
 
         <form method="GET" action="{{ route('selectCompany') }}">
             <p class="company_name">メーカー名</p>
@@ -21,17 +22,18 @@
         </form>
     </div>
 
-    <div class="newjoin">
+    <div class=" newjoin">
         <form method="GET" action="{{ route('newRegistration') }}">
             <button class="new_btn btn btn-warning">新規登録</button>
         </form>
     </div>
 
 
-    <div class="main container product-table">
+    <div class="main container">
+
         {{-- {{ dd($products) }} --}}
 
-        @foreach ($productCompanyId as $product)
+        @foreach ($products as $product)
             <div class="mb-3 product-group">
                 <img class="col-1" src="{{ asset('/storage/images/' . $product->img_path) }}">
                 <p class="me-3 col-2">{{ $product->product_name }}</p>
@@ -44,8 +46,7 @@
                 </a>
 
                 <td>
-                    <form action="{{ route('deleteProduct', $product->id) }}" method="POST"
-                        onclick='return confirm("「{{ $product->product_name }}」を削除しますか？")'>
+                    <form action="{{ route('deleteProduct', $product->id) }}" method="POST" onclick='return confirm("「{{ $product->product_name }}」を削除しますか？")'>
                         @csrf
                         <button type="submit" class="btn btn-danger ">削除</button>
                     </form>
