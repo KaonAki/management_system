@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="search">
-        <p class="serch_name user-search-form">検索条件</p>
-        <form method="GET" action="{{ route('searchProduct') }}">
+        <p class="serch_name">検索条件</p>
+        <div class="serch_name search-form">
             <p class="product_name">商品名</p>
             <input id="search_name" class="search_box" type="text" name="search_name" placeholder="キーワードを入力">
-            <input type="submit" class="btn btn-info search-icon" name="submit" value="検索">
-        </form>
+            <input type="button" class="btn btn-info search-icon" name="button" value="検索">
+        </div>
 
         <form method="GET" action="{{ route('selectCompany') }}">
             <p class="company_name">メーカー名</p>
@@ -21,7 +21,7 @@
         </form>
     </div>
 
-    <div class=" newjoin">
+    <div class="newjoin">
         <form method="GET" action="{{ route('newRegistration') }}">
             <button class="new_btn btn btn-warning">新規登録</button>
         </form>
@@ -29,7 +29,6 @@
 
 
     <div class="main container product-table">
-
         {{-- {{ dd($products) }} --}}
 
         @foreach ($productCompanyId as $product)

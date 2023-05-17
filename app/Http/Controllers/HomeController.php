@@ -276,13 +276,13 @@ class HomeController extends Controller
     }
 
     // ajaxの検索フォーム
-    // public function productSearchName($productName)
-    // {
-    //     $products = $this->user
-    //         ->where('product_name', 'like', '%' . $productName . '%')
-    //         ->withCount('items')
-    //         ->orderBy('items_count', 'desc')
-    //         ->get();
-    //     return response()->json($products);
-    // }
+    public function productSearchName()
+    {
+        dd('ほーむ');
+        $products = $this->product
+            ->where('product_name', 'like', '%' . $productName . '%')
+            ->orderBy('id', 'desc')
+            ->get();
+        return response()->json($products);
+    }
 }
