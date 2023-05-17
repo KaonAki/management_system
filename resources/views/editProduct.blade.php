@@ -52,7 +52,7 @@
 
 
                 <label for="editImg">画像</label>
-                <img src="{{ asset('/storage/images/' . $productId->img_path) }}" class="form-control">
+                <img class="detailImage" src="{{ asset('/storage/images/' . $productId->img_path) }}" class="form-control">
                 {{-- inputのfileで入れちゃう editImage --}}
                 <input type="file" class="form-control" name="editImage">
 

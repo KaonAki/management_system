@@ -22,7 +22,7 @@
         </form>
     </div>
 
-    <div class=" newjoin">
+    <div class="newjoin">
         <form method="GET" action="{{ route('newRegistration') }}">
             <button class="new_btn btn btn-warning">新規登録</button>
         </form>
@@ -30,9 +30,6 @@
 
 
     <div class="main container">
-
-        {{-- {{ dd($products) }} --}}
-
         @foreach ($products as $product)
             <div class="mb-3 product-group">
                 <img class="col-1" src="{{ asset('/storage/images/' . $product->img_path) }}">
@@ -46,7 +43,8 @@
                 </a>
 
                 <td>
-                    <form action="{{ route('deleteProduct', $product->id) }}" method="POST" onclick='return confirm("「{{ $product->product_name }}」を削除しますか？")'>
+                    <form action="{{ route('deleteProduct', $product->id) }}" method="POST"
+                        onclick='return confirm("「{{ $product->product_name }}」を削除しますか？")'>
                         @csrf
                         <button type="submit" class="btn btn-danger ">削除</button>
                     </form>

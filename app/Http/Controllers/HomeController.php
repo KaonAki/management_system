@@ -35,12 +35,12 @@ class HomeController extends Controller
         // dd($companies);
 
         $productModel = new Product();
-        $products = $productModel->getList();
+        $productList = $productModel->getList();
         // companyとproductの結合
-        $productCompanyId = $productModel->all();
+        $products = $productModel->all();
         // dd($productCompanyId);
 
-        return view('home', compact('companies', 'productCompanyId', 'products'));
+        return view('home', compact('companies', 'productList', 'products'));
     }
 
     // キーワード検索
@@ -50,18 +50,11 @@ class HomeController extends Controller
         $companies = $model->getList();
 
         // 検索フォームで入力された値を取得する
-        $search = $request->input('search_name');
+        $search = $request->input('search');
 
         $productModel = new Product();
         $products = $productModel->getSearch($search);
-        // dd($search);
-
-        // $query = Product::query();
-        // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
-        // $products = $query->where('product_name', 'like', '%' . $search . '%')->get();
         // dd($products);
-        // }
-
         return view('home', compact('companies', 'products'));
         // return redirect('/')->with(compact('products'));
     }
