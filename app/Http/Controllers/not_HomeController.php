@@ -238,16 +238,16 @@ class HomeController extends Controller
     }
 
     // 削除完了
-    public function deleteProduct($id)
-    {
-        // 指定のIDのレコード1件を取得
-        $productModel = Product::find($id);
+    // public function deleteProduct($id)
+    // {
+    //     // 指定のIDのレコード1件を取得
+    //     $productModel = Product::find($id);
 
-        // レコードを削除
-        $productModel->delete();
-        // 削除したら一覧画面にリダイレクト
-        return redirect()->route('home', compact( 'productModel'));
-    }
+    //     // レコードを削除
+    //     $productModel->delete();
+    //     // 削除したら一覧画面にリダイレクト
+    //     return redirect()->route('home', compact( 'productModel'));
+    // }
 
     public function validateProduct(Request $request)
 {

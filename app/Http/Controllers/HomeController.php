@@ -10,25 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
 
     //  商品一覧表示
     public function index()
     {
+        
         // インスタンス生成
         $model = new Company();
         $companies = $model->getList();
@@ -37,10 +29,20 @@ class HomeController extends Controller
         $productModel = new Product();
         $products = $productModel->getList();
         // companyとproductの結合
-        $productCompanyId = $productModel->all();
+        $productCompanyId = $productModel->getProduct();
         // dd($productCompanyId);
 
         return view('home', compact('companies', 'productCompanyId', 'products'));
+    }
+
+    public function indexView()
+    {
+    $model = new Company();
+        $companies = $model->getList();
+
+        $productModel = new Product();
+        $products = $productModel->getProduct();
+        return response()->json($products);
     }
 
     // キーワード検索
@@ -56,14 +58,7 @@ class HomeController extends Controller
         $productCompanyId = $productModel->getSearch($search);
         // dd($search);
 
-        // $query = Product::query();
-        // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
-        // $products = $query->where('product_name', 'like', '%' . $search . '%')->get();
-        // dd($products);
-        // }
-
         return view('home', compact('companies', 'productCompanyId'));
-        // return redirect('/')->with(compact('products'));
     }
 
     // メーカー選択検索
@@ -72,7 +67,6 @@ class HomeController extends Controller
         $model = new Company();
         $companies = $model->getList();
 
-        // メーカー選択検索
         $companyId = $request->input('companyId');
         // dd($company);
 
@@ -268,22 +262,56 @@ class HomeController extends Controller
             // 削除したら一覧画面にリダイレクト
             DB::commit(); // 問題なかったからコミット
         } catch (Exception $e) {
-            DB::rollback(); // 問題があったからロールバック
             ver_dump('エラー：' . $e->getMessage());
+            DB::rollback(); // 問題があったからロールバック
         }
-
-        return redirect()->route('home', compact('productModel'));
     }
 
     // ajaxの検索フォーム
-    public function productSearchName($product_name)
+    public function productSearchName($id)
     {
-        // 検索フォームで入力された値を取得する
-        // $search = $request->input('search_name');
+        $model = new Company();
+        $companies = $model->getList();
 
         $productModel = new Product();
-        $products = $productModel->getSearch($product_name);
-        // dd('ほーむ');
+        $products = $productModel->getAjaxSearch($id);
+
         return response()->json($products);
     }
+
+    // ajaxのメーカー検索フォーム
+    public function companySearchName($id)
+    {
+        $model = new Company();
+        $companies = $model->getList();
+
+        $productModel = new Product();
+        $products = $productModel->getCompanySearch($id);
+
+        return response()->json($products);
+    }
+
+    // ajaxの価格検索フォーム
+    public function productSearchPrice($price)
+    {
+        $model = new Company();
+        $companies = $model->getList();
+
+        $productModel = new Product();
+        $products = $productModel->getProductPrice($price);
+
+        return response()->json($products);
+    }
+
+    // ajaxの在庫検索フォーム
+    public function productSearchStock($stock)
+    {
+        $model = new Company();
+        $companies = $model->getList();
+
+        $productModel = new Product();
+        $products = $productModel->getProductStock($stock);
+        return response()->json($products);
+    }
+    
 }
